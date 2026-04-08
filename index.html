@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Dashboard</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-color: #f8fafc;
+            --accent-homarr: #f59e0b;
+            --accent-nextcloud: #0082c9;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 20% 35%, rgba(56, 189, 248, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 65%, rgba(139, 92, 246, 0.15) 0%, transparent 40%);
+            color: var(--text-color);
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            margin-bottom: 2rem;
+            font-weight: 300;
+            letter-spacing: -1px;
+            opacity: 0.9;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 30px;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 45px rgba(0,0,0,0.4);
+        }
+
+        .icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            opacity: 0.9;
+        }
+
+        /* Akcenty dla konkretnych usług */
+        .card-homarr:hover { background: rgba(245, 158, 11, 0.15); }
+        .card-nextcloud:hover { background: rgba(0, 130, 201, 0.15); }
+
+    </style>
+</head>
+<body>
+
+    <h1>Usługi Docker</h1>
+
+    <div class="grid">
+        <a href="#" id="homarr-link" class="card card-homarr">
+            <span class="icon">🏠</span>
+            <span class="name">Homarr</span>
+        </a>
+
+        <a href="#" id="nextcloud-link" class="card card-nextcloud">
+            <span class="icon">☁️</span>
+            <span class="name">Nextcloud</span>
+        </a>
+    </div>
+
+    <script>
+        // Automatyczne wykrywanie hosta
+        // Jeśli wejdziesz na stronę przez http://192.168.1.50, 
+        // linki automatycznie ustawią ten sam adres IP.
+        const host = window.location.hostname;
+        
+        document.getElementById('homarr-link').href = `http://${host}:7575`;
+        document.getElementById('nextcloud-link').href = `http://${host}:8080`;
+    </script>
+
+</body>
+</html>
